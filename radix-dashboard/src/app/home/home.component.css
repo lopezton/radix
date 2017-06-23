@@ -1,0 +1,6 @@
+.panel.announcements > .panel-body {
+	padding: 0;
+}
+.panel.announcements .panel.announcement > .panel-heading {
+	padding: 0 25px
+}

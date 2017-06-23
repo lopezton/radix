@@ -1,0 +1,8 @@
+<div class="row">
+	<div class="col-sm-4 col-md-3" *ngFor="let application of applications">
+		<div class="application" (click)="openApplication(application)">
+			<p class="title">{{application.title}}</p>
+			<p class="description">{{application.description}}</p>
+		</div>
+	</div>
+</div>
