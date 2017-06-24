@@ -1,6 +1,9 @@
-client:
-  build: .
-  ports:
-    - "4200:4200"
-  volumes:
-    - .:/usr/src/app
+version: '3'
+  
+services:
+  
+  nginx:
+    build: .
+    container_name: 'radix'
+    ports:
+      - "80:80"

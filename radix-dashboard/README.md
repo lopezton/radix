@@ -1,4 +1,4 @@
-# RadixDashboard
+# Radix Dashboard
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.3.
 
@@ -13,6 +13,19 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Deploy via Docker
+
+*NOTE: Docker must be installed to successfully perform the deployment*
+
+After conducting a build (see above), run the following commands:  
+
+```bash
+docker build -t radix/dashboard .
+docker run -p 80:80 radix/dashboard
+```
+
+Open a web browser and navigate to http://192.168.99.100 (or your Docker Machine's IP).
 
 ## Running unit tests
 
