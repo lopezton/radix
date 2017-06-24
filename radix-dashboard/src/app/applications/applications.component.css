@@ -1,12 +1,28 @@
 .application {
     text-align: center;
-    background-color: red;
-    margin: 15px 0;
-    padding: 15px;
-    height: 200px;
-    color: #fff;
+    padding: 10px;
+    margin-right: 10px;
+    color: red;
     cursor: pointer;
+    display: inline-block;
+    width: 120px;
+    vertical-align: top;
+    margin-bottom: 10px;
+    user-select: none;
+}
+.application.selected {
+	border: 2px solid #fff;
+    background: rgba(0, 137, 255, 0.5);
+    margin-top: -2px;
+    margin-bottom: 8px;
 }
 .application:hover {
-	background-color: #ff3939;
+	border: 2px solid #fff;
+    background: rgba(0, 137, 255, 0.3);
+    margin-top: -2px;
+    margin-bottom: 8px;
+}
+.application > .title {
+	color: #fff;
+    text-shadow: 1px 1px 2px #000;
 }

@@ -1,8 +1,8 @@
-<div class="row">
-	<div class="col-sm-4 col-md-3" *ngFor="let application of applications">
-		<div class="application" (click)="openApplication(application)">
-			<p class="title">{{application.title}}</p>
-			<p class="description">{{application.description}}</p>
-		</div>
+<div class="applications">
+	<div [ngClass]="{'application': true, 'selected': isSelected(app)}" (click)="selectApplication(app)" (dblclick)="openApplication(app)" *ngFor="let app of applications">
+		<span class="icon">
+			<i class="fa fa-camera-retro fa-5x"></i>
+		</span>
+		<p class="title">{{app.title}}</p>
 	</div>
 </div>
