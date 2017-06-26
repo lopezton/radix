@@ -1,4 +1,4 @@
-import { Application } from '../application';
+import { Application } from '../models/application';
 import { EverestService } from '../everest.service';
 import { Component, OnInit } from '@angular/core';
 
