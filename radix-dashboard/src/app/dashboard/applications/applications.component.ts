@@ -1,6 +1,7 @@
-import { Application } from '../application';
-import { EverestService } from '../everest.service';
 import { Component, OnInit } from '@angular/core';
+
+import { EverestService } from '../../everest.service';
+import { Application } from '../../models/application';
 
 @Component({
   selector: 'app-applications',
