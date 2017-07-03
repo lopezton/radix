@@ -2,44 +2,47 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { MockBackend, MockConnection } from '@angular/http/testing';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ApplicationsComponent } from './applications/applications.component';
-import { AuthGuard } from './authentication/auth.guard';
+import { HomeComponent } from './dashboard/home/home.component';
+import { ApplicationsComponent } from './dashboard/applications/applications.component';
+import { DashboardAuthService } from './dashboard/authentication/dashboard-auth.service';
+import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 import { EverestService } from './everest.service';
-import { AuthenticationService } from './login/authentication.service';
-import { fakeBackendProvider } from './login/fake-backend';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './login/user.service';
-import { BaseRequestOptions } from '@angular/http';
+import { HeaderComponent } from './dashboard/header/header.component';
+import { HeaderTopLinksComponent } from './dashboard/header/header-top-links/header-top-links.component';
+import { HeaderSidebarComponent } from './dashboard/header/header-sidebar/header-sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
     HomeComponent,
     ApplicationsComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent,
+    HeaderTopLinksComponent,
+    HeaderSidebarComponent
   ],
   imports: [
-    BrowserModule,
     NgbModule,
+    BrowserModule,
+    DashboardRoutingModule,
     AppRoutingModule,
+    FormsModule,
     HttpModule
   ],
   providers: [
-    AuthGuard,
     EverestService,
-    AuthenticationService,
     UserService,
-    
-    // providers used to create fake backend
-    fakeBackendProvider,
-    MockBackend,
-    BaseRequestOptions
+    DashboardAuthService
   ],
   bootstrap: [AppComponent]
 })
