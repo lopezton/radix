@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "app.security.entrypoint.requiresauth",
+    "type": "java.lang.String",
+    "description": "Configures the paths that will be required to have authentication. (e.g. '/**')"
+  },
+  {
+    "name": "app.security.entrypoint.login",
+    "type": "java.lang.String",
+    "description": "Configures the path required for login. (e.g. '/api/auth/login')"
+  },
+  {
+    "name": "app.security.entrypoint.refresh",
+    "type": "java.lang.String",
+    "description": "Configures the path to obtain a refresh token/ (e.g. '/api/auth/token')"
+  }
+]}
