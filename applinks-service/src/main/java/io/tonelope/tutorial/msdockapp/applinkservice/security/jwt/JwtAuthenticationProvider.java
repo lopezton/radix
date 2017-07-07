@@ -11,7 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import io.tonelope.tutorial.msdockapp.applinkservice.model.User;
+import io.tonelope.tutorial.msdockapp.applinkservice.dao.model.MongoUser;
 import io.tonelope.tutorial.msdockapp.applinkservice.security.model.UserPrincipal;
 import lombok.val;
 
@@ -27,13 +27,13 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         val rawAccessToken = (RawAccessJwtToken) authentication.getCredentials();
 
         val jwsClaims = rawAccessToken.parseClaims(jwtSettings.getTokenSigningKey());
-        val subject = jwsClaims.getBody().getSubject();
+        val username = jwsClaims.getBody().getSubject();
         List<String> scopes = jwsClaims.getBody().get("scopes", List.class);
         List<GrantedAuthority> authorities = scopes.stream()
                 .map(authority -> new SimpleGrantedAuthority(authority))
                 .collect(Collectors.toList());
         
-        UserPrincipal context = UserPrincipal.create(new User(subject, authorities));
+        val context = UserPrincipal.create(username, authorities);
         
         return new JwtAuthenticationToken(context, context.getAuthorities());
     }

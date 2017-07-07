@@ -11,6 +11,8 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     returnUrl: string;
+    loginErrorMsg: string;
+  
  
     constructor(
         private route: ActivatedRoute,
@@ -18,22 +20,21 @@ export class LoginComponent implements OnInit {
         private dashboardAuthService: DashboardAuthService) {}
  
     ngOnInit() {
-        // reset login status
-        // this.authenticationService.logout();
- 
-        // get return url from route parameters or default to '/'
+        // get return url from route parameters or default to home view.
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard/home';
     }
  
     login() {
+        this.loginErrorMsg = '';
         this.loading = true;
         this.dashboardAuthService.login(this.model.email, this.model.password)
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.loading = false;
-                });
+          .subscribe(
+            data => {
+              this.router.navigate([this.returnUrl]);
+            },
+            error => {
+              this.loginErrorMsg = error.json().message;
+              this.loading = false;
+            });
     }
 }
