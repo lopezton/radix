@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.tonelope.tutorial.msdockapp.applinkservice.dao.UserRepository;
+import io.tonelope.tutorial.msdockapp.applinkservice.dao.MongoUserRepository;
 import io.tonelope.tutorial.msdockapp.applinkservice.security.jwt.InvalidJwtToken;
 import io.tonelope.tutorial.msdockapp.applinkservice.security.jwt.JwtSettings;
 import io.tonelope.tutorial.msdockapp.applinkservice.security.jwt.JwtToken;
@@ -36,7 +36,7 @@ public class RefreshTokenEndpoint {
     private JwtSettings jwtSettings;
     
     @Autowired 
-    private UserRepository userRepository;
+    private MongoUserRepository userRepository;
     
     @Autowired 
     private TokenVerifier tokenVerifier;
@@ -57,14 +57,14 @@ public class RefreshTokenEndpoint {
             throw new InvalidJwtToken();
         }
 
-        val subject = refreshToken.getSubject();
-        val user = userRepository.findByUsername(subject).orElseThrow(() -> new UsernameNotFoundException("User not found: " + subject));
+        val username = refreshToken.getSubject();
+        val user = userRepository.findByCredentialsUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
         if (user.getGrantedAuthorities() == null) {
         	throw new InsufficientAuthenticationException("User has no roles assigned");
         }
 
-        val userPrincipal = UserPrincipal.create(user);
+        val userPrincipal = UserPrincipal.create(username, user.getGrantedAuthorities());
 
         return tokenFactory.createAccessJwtToken(userPrincipal);
     }

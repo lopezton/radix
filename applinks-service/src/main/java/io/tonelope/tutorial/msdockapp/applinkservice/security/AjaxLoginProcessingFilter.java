@@ -20,8 +20,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.tonelope.tutorial.msdockapp.applinkservice.model.User;
 import io.tonelope.tutorial.msdockapp.applinkservice.security.exception.AuthMethodNotSupportedException;
+import io.tonelope.tutorial.msdockapp.applinkservice.security.model.LoginRequest;
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,7 +50,7 @@ public class AjaxLoginProcessingFilter extends AbstractAuthenticationProcessingF
             throw new AuthMethodNotSupportedException("Authentication method not supported");
         }
 
-        val loginRequest = objectMapper.readValue(request.getReader(), User.class);
+        val loginRequest = objectMapper.readValue(request.getReader(), LoginRequest.class);
 
         if (StringUtils.isBlank(loginRequest.getUsername()) || StringUtils.isBlank(loginRequest.getPassword())) {
             throw new AuthenticationServiceException("Username or Password not provided");

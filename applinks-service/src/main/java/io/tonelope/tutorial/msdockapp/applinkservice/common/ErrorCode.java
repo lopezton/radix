@@ -3,6 +3,7 @@ package io.tonelope.tutorial.msdockapp.applinkservice.common;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ErrorCode {
+	GENERAL(0),
     GLOBAL(2),
     AUTHENTICATION(10), 
     JWT_TOKEN_EXPIRED(11);

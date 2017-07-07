@@ -7,24 +7,26 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import io.tonelope.tutorial.msdockapp.applinkservice.model.User;
+import io.tonelope.tutorial.msdockapp.applinkservice.dao.model.MongoUser;
 import lombok.Getter;
+import lombok.val;
 
 @Getter
 public class UserPrincipal implements UserDetails {
 
-	private User user;
+	private final MongoUser user;
 	
-	public static UserPrincipal create(User user) {
-        if (null == user || StringUtils.isBlank(user.getUsername()))  {
-        	throw new IllegalArgumentException("Missing user information: " + user);
-        }
-        return new UserPrincipal(user);
-    }
-	
-	public UserPrincipal(User user) {
-		this.user = user;
+	private UserPrincipal(String username, List<GrantedAuthority> authorities) {
+		this.user = new MongoUser(username, null, authorities);
 	}
+	
+	public static UserPrincipal create(String username, List<GrantedAuthority> authorities) {
+        if (StringUtils.isBlank(username))  {
+        	throw new IllegalArgumentException("Missing username: " + username);
+        }
+
+        return new UserPrincipal(username, authorities);
+    }
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -33,12 +35,12 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return this.user.getPassword();
+		return this.user.getCredentials().getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return this.user.getUsername();
+		return this.user.getCredentials().getUsername();
 	}
 
 	@Override

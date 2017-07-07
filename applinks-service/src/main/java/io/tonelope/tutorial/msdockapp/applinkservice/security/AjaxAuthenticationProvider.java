@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.lang.Assert;
-import io.tonelope.tutorial.msdockapp.applinkservice.dao.UserRepository;
+import io.tonelope.tutorial.msdockapp.applinkservice.dao.MongoUserRepository;
 import io.tonelope.tutorial.msdockapp.applinkservice.security.model.UserPrincipal;
 import lombok.val;
 
@@ -19,7 +19,7 @@ import lombok.val;
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
-    private UserRepository userRepository;
+    private MongoUserRepository userRepository;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -28,15 +28,17 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
         val username = (String) authentication.getPrincipal();
         val password = (String) authentication.getCredentials();
 
-        val user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+        val user = userRepository.findByCredentialsUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
-        if (!password.equals(user.getPassword())) {
+        if (!password.equals(user.getCredentials().getPassword())) {
             throw new BadCredentialsException("Authentication Failed. Username or Password not valid.");
         }
 
-        if (user.getGrantedAuthorities() == null) throw new InsufficientAuthenticationException("User has no roles assigned");
+        if (user.getGrantedAuthorities() == null) {
+        	throw new InsufficientAuthenticationException("User has no roles assigned");
+        }
 
-        val userPrincipal = UserPrincipal.create(user);
+        val userPrincipal = UserPrincipal.create(username, user.getGrantedAuthorities());
 
         return new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
     }
