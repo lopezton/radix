@@ -1,19 +1,20 @@
-import { DashboardAuthService } from './dashboard-auth.service';
+import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()
 export class DashboardAuthGuard implements CanActivate {
   
-  constructor(private authService: DashboardAuthService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     
-    if (this.authService.isLoggedIn) {
+    if (this.userService.getActiveUserFromStorage()) {
+      // TODO - Attempt to hit the server and validate token.
       return true;
     }
     
-    this.authService.redirectUrl = state.url;
+//    this.userService.redirectUrl = state.url;
     
     this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
     return false;

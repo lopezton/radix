@@ -1,4 +1,4 @@
-import { DashboardAuthService } from '../dashboard/authentication/dashboard-auth.service';
+import { UserService } from '../../authentication/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
     model: any = {};
-    loading = false;
     returnUrl: string;
     loginErrorMsg: string;
   
@@ -17,24 +16,32 @@ export class LoginComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private dashboardAuthService: DashboardAuthService) {}
+        private userService: UserService) {}
  
     ngOnInit() {
-        // get return url from route parameters or default to home view.
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard/home';
+      
+      this.handlePreviouslyAuthenticatedUser();
+      
+      // get return url from route parameters or default to home view.
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard/home';
+    }
+ 
+    handlePreviouslyAuthenticatedUser() {
+      // If a user is currently active, redirect to the dashboard view.
+      if (this.userService.getActiveUserFromStorage()) {
+        this.router.navigate(['/dashboard/home']);
+      }
     }
  
     login() {
         this.loginErrorMsg = '';
-        this.loading = true;
-        this.dashboardAuthService.login(this.model.email, this.model.password)
+        this.userService.login(this.model.email, this.model.password)
           .subscribe(
             data => {
               this.router.navigate([this.returnUrl]);
             },
             error => {
               this.loginErrorMsg = error.json().message;
-              this.loading = false;
             });
     }
 }

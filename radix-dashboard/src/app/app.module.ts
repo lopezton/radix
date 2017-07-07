@@ -9,13 +9,13 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { ApplicationsComponent } from './dashboard/applications/applications.component';
-import { DashboardAuthService } from './dashboard/authentication/dashboard-auth.service';
+import { DashboardHttpService } from './dashboard/dashboard-http.service';
 import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardService } from './dashboard/dashboard.service';
 
-import { EverestService } from './everest.service';
-import { LoginComponent } from './login/login.component';
-import { UserService } from './login/user.service';
+import { LoginComponent } from './dashboard/login/login.component';
+import { UserService } from './authentication/user.service';
 import { HeaderComponent } from './dashboard/header/header.component';
 import { HeaderTopLinksComponent } from './dashboard/header/header-top-links/header-top-links.component';
 import { HeaderSidebarComponent } from './dashboard/header/header-sidebar/header-sidebar.component';
@@ -40,9 +40,9 @@ import { HeaderSidebarComponent } from './dashboard/header/header-sidebar/header
     HttpModule
   ],
   providers: [
-    EverestService,
     UserService,
-    DashboardAuthService
+    DashboardService,
+    DashboardHttpService
   ],
   bootstrap: [AppComponent]
 })

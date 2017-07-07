@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EverestService } from '../../everest.service';
+import { APPLICATIONS } from '../../mock-applications';
 import { Application } from '../../models/application';
 
 @Component({
@@ -13,10 +13,10 @@ export class ApplicationsComponent implements OnInit {
   applications: Application[];
   selected: Application;
   
-  constructor(private everestService: EverestService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.applications = this.everestService.getApplications();
+    this.applications = APPLICATIONS;
   }
 
   selectApplication(app: Application) {
