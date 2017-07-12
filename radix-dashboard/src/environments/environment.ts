@@ -4,5 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
+  dashboardApiURL : 'http://localhost:9001',
   production: false
 };

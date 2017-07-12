@@ -1,0 +1,19 @@
+version: '3'
+services:
+    
+    mongo:
+        image: mongo
+        container_name: radix-server-mongo
+        ports:
+            - "${MONGODB_PORT}:${MONGODB_PORT}"
+            
+    radix-server:
+        image: radix-server
+        container_name: radix-server
+        environment:
+            - RADIX_SERVER_PORT=${RADIX_SERVER_PORT}
+            - MONGODB_HOST=${MONGODB_HOST}
+            - MONGODB_PORT=${MONGODB_PORT}
+            - spring.profiles.active=docker-local
+        ports:
+            - "${RADIX_SERVER_PORT}:${RADIX_SERVER_PORT}"

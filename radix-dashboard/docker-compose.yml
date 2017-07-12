@@ -1,9 +1,0 @@
-version: '3'
-  
-services:
-  
-  nginx:
-    build: .
-    container_name: 'radix'
-    ports:
-      - "80:80"

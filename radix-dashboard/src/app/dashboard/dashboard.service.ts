@@ -66,7 +66,6 @@ export class DashboardService {
   handleError(err) {
     console.log('DashboardService#handleError(err):');
     console.log(err);
-//    return Observable.of(null);
     return Observable.throw(err);
   }
 }
