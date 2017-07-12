@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.xpanxion.radix</groupId>
-	<artifactId>applink-service</artifactId>
+	<artifactId>radix-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>applink-service</name>
-	<description>Provides application link information</description>
+	<name>radix-server</name>
+	<description>Provides backend support for the Radix application</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -47,7 +47,6 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.7.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
 		<dependency>
 		    <groupId>commons-lang</groupId>
 		    <artifactId>commons-lang</artifactId>

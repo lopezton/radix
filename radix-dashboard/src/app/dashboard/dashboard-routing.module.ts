@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ApplicationsComponent } from './applications/applications.component';
-import { DashboardAuthGuard } from './authentication/dashboard-auth.guard.service';
+import { DashboardAuthGuard } from '../authentication/dashboard-auth.guard.service';
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './home/home.component';
 
@@ -14,6 +14,7 @@ const dashboardRoutes = [
     children: [
       {
         path: '',
+        canActivateChildren: [ DashboardAuthGuard ],
         children: [
           { path: 'home', component: HomeComponent },
           { path: 'applications', component: ApplicationsComponent } 

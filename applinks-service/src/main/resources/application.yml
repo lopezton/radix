@@ -1,6 +1,6 @@
 spring:
   application:
-    name: applink-service
+    name: radix-server
     
   data:
     mongodb:
@@ -34,6 +34,6 @@ app:
       
     jwt:
       tokenExpirationTime: 15 # Number of minutes
-      refreshTokenExpTime: 60 # Minutes
+      refreshTokenExpTime: 120 # Minutes
       tokenIssuer: localhost
       tokenSigningKey: c3FqTwOBxHxLI3jYpDU0U2Y8Y

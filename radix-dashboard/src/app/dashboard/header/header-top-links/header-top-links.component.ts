@@ -1,6 +1,5 @@
-import { UserService } from '../../../login/user.service';
+import { UserService } from '../../../authentication/user.service';
 import { User } from '../../../models/user';
-import { DashboardAuthService } from '../../authentication/dashboard-auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
@@ -18,7 +17,6 @@ export class HeaderTopLinksComponent implements OnInit {
   currentUser: User;
   
   constructor(
-    private authService: DashboardAuthService, 
     private router: Router,
     private userService: UserService) { }
   
@@ -27,11 +25,10 @@ export class HeaderTopLinksComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['']);
+    this.userService.logout();
   }
   
   loadActiveUser() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = this.userService.getActiveUserFromStorage();
   }
 }
