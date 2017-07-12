@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/mergeMap'
+import 'rxjs/add/operator/catch'
 
 import { DashboardService } from '../dashboard/dashboard.service';
 import { TokenMap } from '../models/token-map';
@@ -44,10 +45,16 @@ export class UserService {
       });
   }
   
-  logout() {
+  logout(options?: any) {
     this.activeToken = null;
     localStorage.removeItem('currentUser');
-    this.router.navigate(['']);
+    const queryParams = {};
+    if (options) {
+      if (options.sessionTimeout) {
+        queryParams['sessionTimeout'] = true;
+      }
+    }
+    this.router.navigate(['login'], { queryParams: queryParams});
   }
   
   getActiveUserFromStorage(): User {
@@ -60,5 +67,16 @@ export class UserService {
     }
     
     return activeUser;
+  }
+  
+  obtainNewTokenViaRefresh(): Observable<boolean> {
+    const currentUser = this.getActiveUserFromStorage();
+    return this.dashboardService.getNewTokenViaRefresh(currentUser.refreshToken).map((newToken: string) => {
+      console.log(`UserService#obtainNewTokenViaRefresh: Successfully replaced token \'${currentUser.token}\'` +
+         `with new token \'${newToken}\'`);
+      currentUser.token = newToken;
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      return true;
+    }).catch(err => Observable.of(false));
   }
 }

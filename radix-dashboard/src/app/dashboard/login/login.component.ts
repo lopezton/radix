@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit {
       if (this.userService.getActiveUserFromStorage()) {
         this.router.navigate(['/dashboard/home']);
       }
+      
+      if (this.route.snapshot.queryParams['sessionTimeout'] === 'true') {
+        this.loginErrorMsg = 'Session timed out.';
+      }
     }
  
     login() {

@@ -55,9 +55,8 @@ export class DashboardHttpService {
 
     if (!requestOptions.headers) {
       requestOptions.headers = new Headers();
+      requestOptions.headers.set('X-Authorization', this._buildAuthHeader())
     }
-
-    requestOptions.headers.set('X-Authorization', this._buildAuthHeader())
 
     return this._http.request(new Request(requestOptions));
   }

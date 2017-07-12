@@ -14,6 +14,7 @@ const dashboardRoutes = [
     children: [
       {
         path: '',
+        canActivateChildren: [ DashboardAuthGuard ],
         children: [
           { path: 'home', component: HomeComponent },
           { path: 'applications', component: ApplicationsComponent } 
