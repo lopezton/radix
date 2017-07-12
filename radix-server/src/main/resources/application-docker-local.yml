@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: radix-server
+    
+  data:
+    mongodb:
+      host: ${MONGODB_HOST}
+      port: ${MONGODB_PORT}
+
+server:
+  port: ${RADIX_SERVER_PORT}
+  
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+#    
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: DEBUG
+        
+app:
+  security:
+    entrypoint:
+      requiresauth: /**
+      login: /auth/login
+      refresh: /auth/token
+      
+    jwt:
+      tokenExpirationTime: 15 # Number of minutes
+      refreshTokenExpTime: 120 # Minutes
+      tokenIssuer: localhost
+      tokenSigningKey: c3FqTwOBxHxLI3jYpDU0U2Y8Y

@@ -1,0 +1,8 @@
+version: '3'
+services:
+
+    radix-dashboard:
+        image: radix-dashboard
+        container_name: radix-dashboard
+        ports:
+            - "${RADIX_DASHBOARD_PORT}:80"

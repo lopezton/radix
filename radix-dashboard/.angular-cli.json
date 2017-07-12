@@ -30,6 +30,7 @@
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
+        "docker-local": "environments/environment.docker-local.ts",
         "prod": "environments/environment.prod.ts"
       }
     }

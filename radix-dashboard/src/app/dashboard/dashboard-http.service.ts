@@ -1,4 +1,5 @@
 import { User } from '../models/user';
+import { environment } from '../../environments/environment';
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, RequestOptions, RequestOptionsArgs} from '@angular/http';
 import {Response, RequestMethod, Request, Connection, ConnectionBackend} from '@angular/http';
@@ -8,8 +9,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DashboardHttpService {
-  
-  private APP_ORIGIN = 'http://localhost:9001';
   
   constructor(private _http: Http) { }
 
@@ -49,7 +48,7 @@ export class DashboardHttpService {
   private _request(method: RequestMethod, path: string, body?: string, options?: RequestOptionsArgs): Observable<Response> {
     const requestOptions = new RequestOptions(Object.assign({
       method: method,
-      url: this.APP_ORIGIN + path,
+      url: environment.dashboardApiURL + path,
       body: body
     }, options));
 
