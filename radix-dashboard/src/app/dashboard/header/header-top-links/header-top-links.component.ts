@@ -29,6 +29,6 @@ export class HeaderTopLinksComponent implements OnInit {
   }
   
   loadActiveUser() {
-    this.currentUser = this.userService.getActiveUserFromStorage();
+    this.currentUser = this.userService.getActiveUser();
   }
 }

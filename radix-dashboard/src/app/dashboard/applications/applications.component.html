@@ -1,8 +1,0 @@
-<div class="applications">
-	<div [ngClass]="{'application': true, 'selected': isSelected(app)}" (click)="selectApplication(app)" (dblclick)="openApplication(app)" *ngFor="let app of applications">
-		<span class="icon">
-			<i class="fa fa-camera-retro fa-5x"></i>
-		</span>
-		<p class="title">{{app.title}}</p>
-	</div>
-</div>

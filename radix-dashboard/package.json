@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --port ${RADIX_DASHBOARD_PORT:-8080}",
     "build": "ng build",
-    "build-docker-local": "ng build --env=docker-local", 
+    "build-docker-local": "ng build --env=docker-local",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -1,3 +1,4 @@
+import { ApplicationsService } from './applications/applications.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,10 +11,7 @@ export class DashboardComponent implements OnInit {
   constructor() {}
   
   ngOnInit() {
-    this.updateActiveUserInStorage();
+    
   }
   
-  updateActiveUserInStorage(): boolean {
-    return false;
-  }
 }

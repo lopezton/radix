@@ -57,7 +57,7 @@ export class UserService {
     this.router.navigate(['login'], { queryParams: queryParams});
   }
   
-  getActiveUserFromStorage(): User {
+  getActiveUser(): User {
     let activeUser: User;
     
     try {
@@ -70,7 +70,7 @@ export class UserService {
   }
   
   obtainNewTokenViaRefresh(): Observable<boolean> {
-    const currentUser = this.getActiveUserFromStorage();
+    const currentUser = this.getActiveUser();
     return this.dashboardService.getNewTokenViaRefresh(currentUser.refreshToken).map((newToken: string) => {
       console.log(`UserService#obtainNewTokenViaRefresh: Successfully replaced token \'${currentUser.token}\'` +
          `with new token \'${newToken}\'`);
