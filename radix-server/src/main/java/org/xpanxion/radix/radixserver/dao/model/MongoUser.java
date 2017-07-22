@@ -2,7 +2,6 @@ package org.xpanxion.radix.radixserver.dao.model;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -16,9 +15,6 @@ public class MongoUser {
 	private List<GrantedAuthority> grantedAuthorities;
 	
 	private MongoPersonalData personalData;
-	
-	@DBRef
-	private List<MongoApplication> applications;
 	
 	public MongoUser() {}
 	

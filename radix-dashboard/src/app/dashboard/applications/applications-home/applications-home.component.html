@@ -1,0 +1,15 @@
+<div class="controls">
+	<div class="buttons">
+		<button class="btn btn-default" routerLink="/dashboard/applications/add" title="Click here to add a new application."><i class="fa fa-plus fa-2x"></i></button>
+		<button class="btn btn-default" (click)="editSelectedApplication()" title="Select an application and then click here to edit it."><i class="fa fa-pencil-square-o fa-2x"></i></button>
+		<button class="btn btn-default" (click)="deleteSelectedApplication()" title="Select an application and then click here to remove it."><i class="fa fa-minus fa-2x"></i></button>
+	</div>
+</div>
+<div class="applications">
+	<div [ngClass]="{'application': true, 'selected': isSelected(app)}" (click)="selectApplication(app)" (dblclick)="openApplication(app)" *ngFor="let app of model.applications">
+		<span class="icon">
+			<i class="fa fa-camera-retro fa-5x"></i>
+		</span>
+		<p class="title">{{app.title}}</p>
+	</div>
+</div>

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
  
     handlePreviouslyAuthenticatedUser() {
       // If a user is currently active, redirect to the dashboard view.
-      if (this.userService.getActiveUserFromStorage()) {
+      if (this.userService.getActiveUser()) {
         this.router.navigate(['/dashboard/home']);
       }
       

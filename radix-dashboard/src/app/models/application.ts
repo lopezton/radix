@@ -4,7 +4,7 @@ export class Application {
   title: string;
   description: string;
   url: string;
-  isWeb: boolean;
+  web: boolean;
   
   constructor() {}
 }

@@ -28,7 +28,7 @@ export class DashboardAuthGuard implements CanActivate, CanActivateChild {
   
   _isAuthenticatedWithValidToken(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
     boolean | Observable<boolean> | Promise<boolean> {
-    const user: User = this.userService.getActiveUserFromStorage();
+    const user: User = this.userService.getActiveUser();
     if (user) {
       return this.dashboardService.validateTokenAccess().map(isValidToken => isValidToken).catch(tokenValidationErr => {
         

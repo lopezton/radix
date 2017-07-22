@@ -1,6 +1,7 @@
 package org.xpanxion.radix.radixserver.conf;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -8,11 +9,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.xpanxion.radix.radixserver.dao.MongoApplicationRepository;
+import org.xpanxion.radix.radixserver.dao.MongoUserApplicationsRepository;
 import org.xpanxion.radix.radixserver.dao.MongoUserRepository;
 import org.xpanxion.radix.radixserver.dao.model.MongoApplication;
 import org.xpanxion.radix.radixserver.dao.model.MongoPersonalData;
 import org.xpanxion.radix.radixserver.dao.model.MongoUser;
+import org.xpanxion.radix.radixserver.dao.model.MongoUserApplications;
 
 import lombok.val;
 
@@ -23,7 +25,7 @@ public class LoadMongoDB implements ApplicationListener<ApplicationReadyEvent> {
 	private MongoUserRepository userRepository;
 	
 	@Autowired
-	private MongoApplicationRepository applicationRepository;
+	private MongoUserApplicationsRepository userApplicationsRepository;
 
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent arg0) {
@@ -39,21 +41,37 @@ public class LoadMongoDB implements ApplicationListener<ApplicationReadyEvent> {
 		user2.getPersonalData().setFirstName("Common");
 		user2.getPersonalData().setLastName("User");
 		
-		val applications = new ArrayList<MongoApplication>();
+		this.userRepository.deleteAll();
+		this.userRepository.save(user1);
+		this.userRepository.save(user2);
+		
+		List<MongoApplication> applications = new ArrayList<>();
 		for(int i = 0; i < 10; i++) {
 			applications.add(new MongoApplication());
 			applications.get(i).setTitle("Sample App " + i);
 			applications.get(i).setDescription("Some sample description.");
 			applications.get(i).setUrl("http://localhost:9001/");
-			this.applicationRepository.save(applications.get(i));
+		}
+
+		val apps1 = new MongoUserApplications();
+		apps1.setUserId(user1.getId());
+		apps1.setApplications(applications);
+		
+		applications = new ArrayList<MongoApplication>();
+		for(int i = 0; i < 20; i++) {
+			applications.add(new MongoApplication());
+			applications.get(i).setTitle("Sample App " + (i + 10));
+			applications.get(i).setDescription("Some sample description.");
+			applications.get(i).setUrl("http://localhost:9001/");
 		}
 		
-		user1.setApplications(applications);
-		user2.setApplications(applications);
+		val apps2 = new MongoUserApplications();
+		apps2.setUserId(user2.getId());
+		apps2.setApplications(applications);
 		
-		this.userRepository.deleteAll();
-		this.userRepository.save(user1);
-		this.userRepository.save(user2);
+		this.userApplicationsRepository.deleteAll();
+		this.userApplicationsRepository.save(apps1);
+		this.userApplicationsRepository.save(apps2);
 	}
 	
 	

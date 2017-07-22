@@ -56,6 +56,8 @@ export class DashboardHttpService {
       requestOptions.headers = new Headers();
       requestOptions.headers.set('X-Authorization', this._buildAuthHeader())
     }
+    
+    requestOptions.headers.set('Content-Type', 'application/json');
 
     return this._http.request(new Request(requestOptions));
   }
