@@ -38,7 +38,7 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
         	throw new InsufficientAuthenticationException("User has no roles assigned");
         }
 
-        val userPrincipal = UserPrincipal.create(username, user.getGrantedAuthorities());
+        val userPrincipal = UserPrincipal.create(user);
 
         return new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
     }

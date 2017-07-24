@@ -20,6 +20,10 @@ public class UserPrincipal implements UserDetails {
 	
 	private final MongoUser user;
 	
+	private UserPrincipal(MongoUser user) {
+		this.user = user;
+	}
+	
 	private UserPrincipal(String username, List<GrantedAuthority> authorities) {
 		this.user = new MongoUser(username, null, authorities);
 	}
@@ -31,6 +35,10 @@ public class UserPrincipal implements UserDetails {
 
         return new UserPrincipal(username, authorities);
     }
+	
+	public static UserPrincipal create(MongoUser user) {
+		return new UserPrincipal(user);
+	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

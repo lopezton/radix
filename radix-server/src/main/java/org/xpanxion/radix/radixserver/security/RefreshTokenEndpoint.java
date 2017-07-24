@@ -64,7 +64,7 @@ public class RefreshTokenEndpoint {
         	throw new InsufficientAuthenticationException("User has no roles assigned");
         }
 
-        val userPrincipal = UserPrincipal.create(username, user.getGrantedAuthorities());
+        val userPrincipal = UserPrincipal.create(user);
 
         return tokenFactory.createAccessJwtToken(userPrincipal);
     }
