@@ -26,7 +26,7 @@ export class DashboardService {
     HOME: '/',
     LOGIN: '/auth/login',
     REFRESH_TOKEN: '/auth/token',
-    USER_APPLICATIONS: '/user-applications'
+    USER_APPLICATIONS: '/user_applications'
   }
   
   constructor(private _http: DashboardHttpService) { }

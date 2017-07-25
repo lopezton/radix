@@ -45,7 +45,9 @@ export class ApplicationsHomeComponent implements OnInit {
   deleteSelectedApplication() {
     if (this._applicationsService.selectedApplication) {
       if (confirm(`Delete application "${this._applicationsService.selectedApplication.title}"?`)) {
-        this._applicationsService.deleteSelectedApplication().subscribe(null, err => {
+        this._applicationsService.deleteSelectedApplication().subscribe(resp => {
+          this._applicationsService.selectedApplication = null;
+        }, err => {
           // TODO: Display with Modal Dialogue
           alert(err);
         });
@@ -58,6 +60,7 @@ export class ApplicationsHomeComponent implements OnInit {
   
   ngOnInit() {
     this._loadApplications();
+    this._applicationsService.selectedApplication = null;
   }
   
   isSelected(app: Application) {

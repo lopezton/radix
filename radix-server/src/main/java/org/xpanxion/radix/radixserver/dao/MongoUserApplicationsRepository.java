@@ -11,7 +11,7 @@ import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.xpanxion.radix.radixserver.dao.model.MongoUserApplications;
 
-@RepositoryRestResource(path = "user-applications", collectionResourceRel = "userApplications", itemResourceRel = "userApplications")
+@RepositoryRestResource(path = "user_applications", collectionResourceRel = "userApplications", itemResourceRel = "userApplications")
 public interface MongoUserApplicationsRepository extends MongoRepository<MongoUserApplications, String> {
 
 	@RestResource(path = "userId", rel = "userId")
