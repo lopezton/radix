@@ -1,0 +1,37 @@
+[
+	{  
+		"_id":ObjectId("5976bc16359e8e33889aa041"),
+		"_class":"org.xpanxion.radix.radixserver.dao.model.MongoUser",
+		"credentials":{  
+			"username":"a@a.com",
+			"password":"password"
+		},
+		"grantedAuthorities":[  
+			{  
+				"role":"ROLE_ADMIN",
+				"_class":"org.springframework.security.core.authority.SimpleGrantedAuthority"
+			}
+		],
+		"personalData":{  
+			"firstName":"Arthur",
+			"lastName":"Admin"
+		}
+	}, {  
+		"_id":ObjectId("5976bc16359e8e33889aa042"),
+		"_class":"org.xpanxion.radix.radixserver.dao.model.MongoUser",
+		"credentials":{  
+			"username":"b@b.com",
+			"password":"password"
+		},
+		"grantedAuthorities":[  
+			{  
+				"role":"ROLE_USER",
+				"_class":"org.springframework.security.core.authority.SimpleGrantedAuthority"
+			}
+		],
+		"personalData":{  
+			"firstName":"Common",
+			"lastName":"User"
+		}
+	}
+]
