@@ -30,7 +30,14 @@ MongoDB server version: 3.4.5
 > _
 ```
 
-Type ```exit``` to exit MongoDB.
+Type ```exit``` to exit MongoDB.  
+
+**Build the database**
+Perform this step whenever you would like a fresh copy of database data. You will need to run this the prior to running the application for the first time.  
+
+```bash
+./scripts/load-db.sh
+```  
 
 **Run radix-server in Spring Tool Suite**  
 
