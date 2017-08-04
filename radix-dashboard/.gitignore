@@ -40,3 +40,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# App defined
+src/environments/environment.prod.ts # This is generated from environment.prod.ts.template

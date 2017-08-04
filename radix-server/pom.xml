@@ -23,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Dalston.SR1</spring-cloud.version>
+		<dockerfile.maven.plugin.version>1.3.4</dockerfile.maven.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -87,10 +88,27 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+			  <groupId>com.spotify</groupId>
+			  <artifactId>dockerfile-maven-plugin</artifactId>
+			  <version>${dockerfile.maven.plugin.version}</version>
+			  <executions>
+			    <execution>
+			      <id>default</id>
+			      <goals>
+			        <goal>build</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			  <configuration>
+			  	<repository>${project.name}</repository>
+			  </configuration>
 			</plugin>
 		</plugins>
 	</build>
