@@ -1,11 +1,5 @@
 version: '3'
 services:
-    
-    mongo:
-        image: mongo
-        container_name: radix-server-mongo
-        ports:
-            - "${MONGODB_PORT}:${MONGODB_PORT}"
             
     radix-server:
         image: radix-server

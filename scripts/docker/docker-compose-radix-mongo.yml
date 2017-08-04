@@ -1,0 +1,7 @@
+version: '3'
+services:
+  radix-mongo:
+    build: ../../db/
+    container_name: radix-mongo
+    ports:
+      - 27017:27017

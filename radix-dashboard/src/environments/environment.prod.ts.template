@@ -1,0 +1,4 @@
+export const environment = {
+  dashboardApiURL : 'http://<%= RADIX_SERVER_HOST %>:<%= RADIX_SERVER_PORT %>',
+  production: true
+};
