@@ -6,7 +6,7 @@ services:
         container_name: radix-server
         environment:
             - RADIX_SERVER_PORT=${RADIX_SERVER_PORT}
-            - MONGODB_HOST=${MONGODB_HOST}
+            - MONGODB_HOST=radix-mongo
             - MONGODB_PORT=${MONGODB_PORT}
             - spring.profiles.active=docker-local
         ports:
