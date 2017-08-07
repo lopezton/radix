@@ -10,6 +10,7 @@ export RADIX_DASHBOARD_HOST=${DOCKER_HOST_IP}
 export RADIX_DASHBOARD_PORT=8080
 
 docker-compose -f docker-compose-radix-mongo.yml up --build -d
+SLEEP 10
 docker-compose -f docker-compose-radix-mongo.yml exec radix-mongo bash -c 'mongo < /init/init-scripts.js'
 
 mvn clean install -f ../../radix-server/pom.xml -DskipTests
