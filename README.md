@@ -8,9 +8,10 @@ Running the application with Docker is the least involved way to start the appli
 
 Be sure to have docker installed and simply run the ```scripts/docker/start.sh``` script.  
 
-1. Clone the project
-2. Open a terminal and navigate to ```PROJECT_DIRECTORY/scripts/docker```
-3. Execute the following command:  
+1. Start Docker and edit the **DOCKER_HOST_IP** value in ```start.sh``` to reflect your docker machine's IP address. If running on Mac or Linux the value will simply be **localhost**. If on Windows, you can discover the IP by running ```docker-machine env``` and extracting the IP from the DOCKER_HOST variable.
+2. Clone the project
+3. Open a terminal and navigate to ```PROJECT_DIRECTORY/scripts/docker```
+4. Execute the following command:  
 
 ```bash
 # Start the application and it's dependencies
