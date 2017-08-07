@@ -4,7 +4,7 @@ spring:
     
   data:
     mongodb:
-      host: ${MONGODB_HOST}
+      host: radix-mongo
       port: ${MONGODB_PORT}
 
 server:

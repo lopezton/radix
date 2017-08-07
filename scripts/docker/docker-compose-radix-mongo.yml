@@ -4,4 +4,4 @@ services:
     build: ../../db/
     container_name: radix-mongo
     ports:
-      - 27017:27017
+      - ${MONGODB_PORT}:${MONGODB_PORT}

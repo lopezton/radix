@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # App defined
-src/environments/environment.prod.ts # This is generated from environment.prod.ts.template
+./src/environments/environment.prod.ts # This is generated from environment.prod.ts.template
